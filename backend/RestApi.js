@@ -5,16 +5,15 @@
 // Note: Do NOT use in production before you
 // write logic that limits access in  tHE Acl.js file :)
 
-const crypto = require('crypto');
-const { passwordSalt } = require('../settings.json');
-
-const Acl = require('./Acl');
-const Login = require('./Login');
-
-const db = require('./DatabaseQueryer');
+import fs from 'fs';
+import crypto from 'crypto';
+import Acl from './Acl.js';
+import Login from './Login.js';
+import db from './DatabaseQueryer.js';
 db.verbose = false; // set to true to log db queries
+const { passwordSalt } = JSON.parse(fs.readFileSync('../settings.json', 'utf-8'));
 
-module.exports = class RestApi {
+export default class RestApi {
 
   constructor(expressApp) {
     this.app = expressApp;

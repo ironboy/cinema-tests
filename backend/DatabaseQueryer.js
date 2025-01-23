@@ -3,9 +3,10 @@
 // A thin wrapper with error handling
 // around our DB driver
 
-const mysql = require('mysql2');
+import fs from 'fs';
+import mysql from 'mysql2';
 
-module.exports = class DatabaseQueryer {
+export default class DatabaseQueryer {
 
   static verbose = false;
 
@@ -17,7 +18,7 @@ module.exports = class DatabaseQueryer {
       mySqlUser: user,
       mySqlPassword: password,
       database
-    } = require('../settings.json');
+    } = JSON.parse(fs.readFileSync('../settings.json', 'utf-8'));
 
     this.dbConnection = mysql.createPool({ host, port, user, password, database });
     return this.dbConnection;

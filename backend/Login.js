@@ -1,8 +1,9 @@
-const crypto = require('crypto');
-const db = require('./DatabaseQueryer');
-const { passwordSalt } = require('../settings.json');
+import fs from 'fs';
+import crypto from 'crypto';
+import db from './DatabaseQueryer.js';
+const { passwordSalt } = JSON.parse(fs.readFileSync('../settings.json', 'utf-8'));
 
-module.exports = class Login {
+export default class Login {
 
   static addLoginRoutes(app) {
     this.app = app;

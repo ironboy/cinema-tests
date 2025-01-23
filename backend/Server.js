@@ -1,11 +1,13 @@
-const fs = require('fs');
-const path = require('path');
-const express = require('express');
-const session = require('express-session');
-const DatabaseQueryer = require('./DatabaseQueryer');
-const RestApi = require('./RestApi');
+import fs from 'fs';
+import path from 'path';
+import express from 'express';
+import session from 'express-session';
+import expressMySQLSession from 'express-mysql-session';
+import DatabaseQueryer from './DatabaseQueryer.js';
+import RestApi from './RestApi.js';
+const __dirname = import.meta.dirname;
 
-module.exports = class Server {
+export default class Server {
 
   app = express();
   port = 4000;
@@ -25,8 +27,8 @@ module.exports = class Server {
 
   setupExpressSession() {
     const dbConnection = DatabaseQueryer.connect();
-    const MySQLStore = require('express-mysql-session')(session);
-    const { sessionSalt } = require('../settings.json');
+    const MySQLStore = expressMySQLSession(session);
+    const { sessionSalt } = JSON.parse(fs.readFileSync('../settings.json', 'utf-8'));
     this.app.use(session({
       secret: sessionSalt,
       resave: false,

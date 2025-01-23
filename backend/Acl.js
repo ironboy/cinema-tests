@@ -1,4 +1,4 @@
-module.exports = class Acl {
+export default class Acl {
 
   // Here you can implement ACL
   // return true = allowed, false = forbidden
@@ -6,7 +6,7 @@ module.exports = class Acl {
   // req.sesssion.user -> logged in user if any
 
   static checkRoute(req, table, method, isTable, isView) {
-    
+
     // TURN OFF ALL ACL
     return true;
 

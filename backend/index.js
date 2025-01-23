@@ -1,3 +1,2 @@
-import 'require-from-es';
-const Server = require('./Server');
+import Server from './Server.js';
 new Server();
