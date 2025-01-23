@@ -54,5 +54,4 @@ export default class Acl {
   ['post', 'users', 'not logged in']
   ['post', 'users', 'admin']
   ['get', 'users', 'admin']
-
 */
